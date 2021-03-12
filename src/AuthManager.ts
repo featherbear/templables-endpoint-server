@@ -29,4 +29,15 @@ export default new (class extends ManagerBase {
     if (!this.data.hasOwnProperty(username)) return false
     return bcrypt.compareSync(password, this.data[username].password)
   }
+
+  delete(username: string) {
+    username = username.trim().toLocaleLowerCase()
+
+    if (!this.data.hasOwnProperty(username)) {
+      throw new Error("Username does not exist")
+    }
+
+    delete this.data[username]
+    return true;
+ }
 })()
