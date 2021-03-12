@@ -8,6 +8,11 @@ export default new (class extends ManagerBase {
     }
   }
 
+  constructor() {
+    super()
+    this.check = this.check.bind(this)
+  }
+
   createUser(username: string, password: string) {
     // Clean username
     username = username.trim().toLowerCase()
@@ -25,7 +30,7 @@ export default new (class extends ManagerBase {
 
   check(username: string, password: string) {
     username = username.trim().toLocaleLowerCase()
-
+  
     if (!this.data.hasOwnProperty(username)) return false
     return bcrypt.compareSync(password, this.data[username].password)
   }

@@ -9,7 +9,7 @@ export default function (
 
     try {
       // Attempt to extract username and password
-      let [username, ...passwordSplit] = Buffer.from(/Basic (.+?)/.exec(req.headers.authorization)[1], 'base64').toString().split(":")
+      let [username, ...passwordSplit] = Buffer.from(/Basic (.*)/.exec(req.headers.authorization)[1], 'base64').toString().split(":")
       let password = passwordSplit.join(":")
 
       // Verify against auth check function
