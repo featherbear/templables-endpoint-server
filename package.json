@@ -1,0 +1,30 @@
+{
+  "name": "templables-endpoint-server",
+  "version": "1.0.0",
+  "repository": "git@github.com:featherbear/templables-endpoint-server.git",
+  "author": "Andrew Wong <andrew.j.wong@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "start": "node ./build/server.js",
+    "build": "npm-run-all lint clean transpile",
+    "clean": "rimraf build",
+    "transpile": "sucrase ./src -d ./build --transforms typescript,imports",
+    "lint": "standardx src/**/*.{ts,js} | snazzy",
+    "lint:fix": "standardx -fix src/**/*.{ts,js} | snazzy"
+  },
+
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "sucrase": "^3.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "snazzy": "^9.0.0",
+    "standardx": "^7.0.0"
+  }
+}
