@@ -39,5 +39,5 @@ export default new (class extends ManagerBase {
 
     delete this.data[username]
     return true;
- }
+  }
 })()

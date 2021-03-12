@@ -15,6 +15,8 @@ if (!fs.existsSync(dataDirPath)) fs.mkdirSync(dataDirPath, { recursive: true })
 AuthManager.init(path.join(dataDirPath, 'users.json'))
 TemplateManager.init(path.join(dataDirPath, 'templates.json'))
 
+import AuthMiddlewareFactory from './AuthMiddlewareFactory'
+const authMiddleware = AuthMiddlewareFactory(AuthManager.check)
 
 ///
 const server = express()
@@ -23,6 +25,10 @@ server.use(pluginJSON())
 
 server.get('/', function (req, res) {
   return res.json({ /* ... */ })
+})
+
+server.get('/auth', authMiddleware, function (req, res) {
+  return res.json({status: true})
 })
 
 server.get('/templates', function (req, res) {
