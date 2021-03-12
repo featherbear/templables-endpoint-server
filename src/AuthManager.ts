@@ -1,7 +1,8 @@
 import ManagerBase from './ManagerBase'
+import bcrypt from 'bcryptjs'
 
 export default new (class extends ManagerBase {
-  protected data: Object | {
+  protected data: {
     [username: string]: {
       password: string
     }
@@ -9,15 +10,23 @@ export default new (class extends ManagerBase {
 
   createUser(username: string, password: string) {
     // Clean username
-    username = username.trim()
+    username = username.trim().toLowerCase()
 
-    const f_username = username.toLowerCase()
-    if (this.data.hasOwnProperty(f_username)) {
+    if (this.data.hasOwnProperty(username)) {
       throw new Error("User exists")
     }
 
-    this.data[f_username] = {
-      password
+    this.data[username] = {
+      password: bcrypt.hashSync(password)
     }
+
+    this.save()
+  }
+
+  check(username: string, password: string) {
+    username = username.trim().toLocaleLowerCase()
+
+    if (!this.data.hasOwnProperty(username)) return false
+    return bcrypt.compareSync(password, this.data[username].password)
   }
 })()

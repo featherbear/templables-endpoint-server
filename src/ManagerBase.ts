@@ -18,6 +18,7 @@ export default class {
     if (!fs.existsSync(filePath)) {
       this.save()
     } else {
+      // so uh is this vulnerable to prototype attacks?
       this.data = JSON.parse(fs.readFileSync(filePath, 'utf8'))
     }
   }
