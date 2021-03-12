@@ -28,5 +28,9 @@
     "rimraf": "^3.0.2",
     "snazzy": "^9.0.0",
     "standardx": "^7.0.0"
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint/eslint-plugin"]
   }
 }
